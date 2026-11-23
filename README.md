@@ -16,15 +16,6 @@ This is a proof of concept for a basic implementation using PIC16F1779 MCU from 
 
 
 
--------------------- Project pictures----- v1
-
-
-
-![DSC_0144](https://github.com/naifaljohani/Electronic_DC_Load/assets/54940222/b25f17b5-f578-4078-a58c-23f0a7aeec0b)
-
-![DSC_0141](https://github.com/naifaljohani/Electronic_DC_Load/assets/54940222/1d6b4fdd-1714-48bc-a23b-dc0c72cfb7a6)
-
-![DSC_0142](https://github.com/naifaljohani/Electronic_DC_Load/assets/54940222/b9cd904d-d7c1-4326-9336-b5b269088372)
 
 
 
