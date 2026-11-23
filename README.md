@@ -6,10 +6,10 @@ This is a proof of concept for a basic implementation using PIC16F1779 MCU from 
 -------------------- Project pictures----- v0--- now archive--
 
 
-![Mosfet circuit](https://github.com/naifaljohani/Electronic_DC_Load/assets/54940222/19b7bd76-90c5-471c-8517-a56b619320fa)
+![Mosfet circuit](Hardware/Mosfet%20circuit.JPG)
 
 
-![controlboard](https://github.com/naifaljohani/Electronic_DC_Load/assets/54940222/707641ec-5e6f-4d63-8b01-6188cffea987)
+![controlboard](Hardware/controlboard.jpg)
 
 
 
