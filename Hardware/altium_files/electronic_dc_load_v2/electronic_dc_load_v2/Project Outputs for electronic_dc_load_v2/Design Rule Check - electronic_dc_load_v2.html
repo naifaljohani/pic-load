@@ -1,0 +1,466 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD20\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">8/24/2021</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">12:27:41 PM</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc" class="file"><acronym title="C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc">C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">38</td></tr>
+</table>
+</td>
+</table><a name="IDIAJDC0UZ0AJ2JOXL4YK1IFJOTIL3E4QKWN322EEX1VJ0NG1FIFOD"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDBJKYNCYWUQ0GO4HBLSER1XWLZKY5PAPGFEPUFUO5V2RLQSUDVCGL">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNO3EFNFKXNJ1CBQCSZMKREAD1GEMQ5QJIWUWKSCWYQOTVISXREWB">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDE14DQTYDA3DGH5DWCGKHZZ3SQDDF3NJBHFKFTCP0LGFDRB3LG1JP">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDSXLF1VE0M25RBG3U2M3BALQBWMKM35DTOAH0ZGDR2O4LTMZKZ4LI">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDEZK2FAQ40GQ2GG41GSETOSJ5WKAGNOYQPAOSBSE0VEEOEKUVVKKN">Width Constraint (Min=0.254mm) (Max=5mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID4AB3NXBJOQNMKFT5X0FI5Y0GJHY1YF1ZNO0KLMFQHAI5BZOTEDKM">Width Constraint (Min=3mm) (Max=5mm) (Preferred=5mm) (InNet('NetB1_1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID0ZGD4YLNXUUDOMOO3DICPJLJ4MNIBBOJY3FAJRM5HG15WIM2X40F">Width Constraint (Min=1mm) (Max=5mm) (Preferred=3mm) (InNet('NetD7_A'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDZU50RBY2003MEO2TW25BBG5FLJ5PCTJUP1DVOOOUJYZQIPCFKK4O">Width Constraint (Min=1mm) (Max=5mm) (Preferred=3mm) (InNet('NetJ14_01'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2ADG32H23WLZBMJEBLDPG4CHVFUKNKMYO2LC30PWT3QVESDHC0ZE">Width Constraint (Min=1mm) (Max=5mm) (Preferred=3mm) (InNet('NetF1_1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID13OHD4QHPZQ0FCFJRMJ1H4YYXGXL14NKLQHPJXH255CMF5VMO3NE">Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID20PZGNGEI2ZPPM04WM12HC5VLIXB23VG5IUICULG4BL1XEDHAH0F">Hole Size Constraint (Min=0.025mm) (Max=6.3mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDTMTKR2A4NG3RKP3RIA3W4PATC3WUKLX2X4LIUJV0R2SQ4ADNJNL">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDE2AEYA022VZZFJ20X0FLOBMI1FNDV0HTZTPNM0PCUSFERF2KLZ5J">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">38</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDRSP51DR5NC25IRPGSB5S3GZP4VI35ASIDTBUCI0VITWI34B11KH">Silk To Solder Mask (Clearance=0.15mm) (IsPad),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDR3VAFZMGK1FEF0QOWEMW11ERTLMTDDS4E1KCYTBEJFPGVQMCLDHC">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDHVPHJSVRQ5CNFEKI2ZGRG4DOZFYZ2IBKOMUT0NK5R4MEDI5JXLID">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDE5K5MOXG43WTCLOMZGMNFSQYLOXX20A1FLD33TWDVVA1X5IIJ0P">Board Clearance Constraint (Gap=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYN4NMDWICV3TPAII55T4VIRNVPCH4H4YD54O4XL0TQZOKAWRVUAP">Room electronic_dc_load_v1 (Bounding Region = (0mm, 64.1mm, 225.4mm, 267.9mm) (InComponentClass('electronic_dc_load_v1'))</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDK0UQFZTJIORZCHYTA5OWMG1KRBP0TDI5RNG3FJMVKBYR1VJ2XAIL">Height Constraint (Min=0mm) (Max=100mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">38</td>
+</tr>
+</table><br><a name="IDE2AEYA022VZZFJ20X0FLOBMI1FNDV0HTZTPNM0PCUSFERF2KLZ5J"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Minimum Solder Mask Sliver (Gap=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6185.91mil|Location2.X=6197.16mil|Location1.Y=4116.422mil|Location2.Y=4127.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6185.91mil|Location2.X=6197.16mil|Location1.Y=4116.422mil|Location2.Y=4127.672mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q11-1(131.23mm,6.3mm) on Multi-Layer And Pad Q11-2(132.5mm,6.3mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6235.91mil|Location2.X=6247.16mil|Location1.Y=4116.422mil|Location2.Y=4127.672mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6235.91mil|Location2.X=6247.16mil|Location1.Y=4116.422mil|Location2.Y=4127.672mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q11-2(132.5mm,6.3mm) on Multi-Layer And Pad Q11-3(133.77mm,6.3mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6178.036mil|Location2.X=6189.286mil|Location1.Y=6293.588mil|Location2.Y=6304.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6178.036mil|Location2.X=6189.286mil|Location1.Y=6293.588mil|Location2.Y=6304.838mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q12-1(131.03mm,61.6mm) on Multi-Layer And Pad Q12-2(132.3mm,61.6mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6228.036mil|Location2.X=6239.286mil|Location1.Y=6293.588mil|Location2.Y=6304.838mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6228.036mil|Location2.X=6239.286mil|Location1.Y=6293.588mil|Location2.Y=6304.838mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q12-2(132.3mm,61.6mm) on Multi-Layer And Pad Q12-3(133.57mm,61.6mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6185.91mil|Location2.X=6197.16mil|Location1.Y=5317.156mil|Location2.Y=5328.406mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6185.91mil|Location2.X=6197.16mil|Location1.Y=5317.156mil|Location2.Y=5328.406mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q13-1(131.23mm,36.799mm) on Multi-Layer And Pad Q13-2(132.5mm,36.799mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6235.91mil|Location2.X=6247.16mil|Location1.Y=5317.156mil|Location2.Y=5328.406mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6235.91mil|Location2.X=6247.16mil|Location1.Y=5317.156mil|Location2.Y=5328.406mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q13-2(132.5mm,36.799mm) on Multi-Layer And Pad Q13-3(133.77mm,36.799mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6170.162mil|Location2.X=6181.412mil|Location1.Y=7305.399mil|Location2.Y=7316.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6170.162mil|Location2.X=6181.412mil|Location1.Y=7305.399mil|Location2.Y=7316.649mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q14-1(130.83mm,87.3mm) on Multi-Layer And Pad Q14-2(132.1mm,87.3mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6220.162mil|Location2.X=6231.412mil|Location1.Y=7305.399mil|Location2.Y=7316.649mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6220.162mil|Location2.X=6231.412mil|Location1.Y=7305.399mil|Location2.Y=7316.649mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.067mm &lt; 0.254mm) Between Pad Q14-2(132.1mm,87.3mm) on Multi-Layer And Pad Q14-3(133.37mm,87.3mm) on Multi-Layer [Top Solder] Mask Sliver [0.067mm] / [Bottom Solder] Mask Sliver [0.067mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1407.761mil|Location2.X=1419.011mil|Location1.Y=8955.926mil|Location2.Y=8967.176mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1407.761mil|Location2.X=1419.011mil|Location1.Y=8955.926mil|Location2.Y=8967.176mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R11-1(9.925mm,130.75mm) on Top Layer And Pad R11-2(11.075mm,130.75mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3051.462mil|Location2.X=3062.712mil|Location1.Y=5461.832mil|Location2.Y=5473.082mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3051.462mil|Location2.X=3062.712mil|Location1.Y=5461.832mil|Location2.Y=5473.082mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R12-1(51.675mm,42mm) on Top Layer And Pad R12-2(52.825mm,42mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3838.863mil|Location2.X=3850.113mil|Location1.Y=6377.186mil|Location2.Y=6388.436mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3838.863mil|Location2.X=3850.113mil|Location1.Y=6377.186mil|Location2.Y=6388.436mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R14-1(71.675mm,65.25mm) on Top Layer And Pad R14-2(72.825mm,65.25mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1348.706mil|Location2.X=1359.956mil|Location1.Y=5471.674mil|Location2.Y=5482.924mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=1348.706mil|Location2.X=1359.956mil|Location1.Y=5471.674mil|Location2.Y=5482.924mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R18-1(8.425mm,42.25mm) on Top Layer And Pad R18-2(9.575mm,42.25mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2246.343mil|Location2.X=2257.593mil|Location1.Y=5841.879mil|Location2.Y=5853.129mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2246.343mil|Location2.X=2257.593mil|Location1.Y=5841.879mil|Location2.Y=5853.129mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R19-1(32.375mm,49.6mm) on Top Layer And Pad R19-2(31.225mm,49.6mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5809.336mil|Location2.X=5820.586mil|Location1.Y=9717.737mil|Location2.Y=9728.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5809.336mil|Location2.X=5820.586mil|Location1.Y=9717.737mil|Location2.Y=9728.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R21-1(121.725mm,150.1mm) on Top Layer And Pad R21-2(122.875mm,150.1mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6100.674mil|Location2.X=6111.924mil|Location1.Y=10015.107mil|Location2.Y=10026.357mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6100.674mil|Location2.X=6111.924mil|Location1.Y=10015.107mil|Location2.Y=10026.357mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R22-1(130.275mm,155.6mm) on Top Layer And Pad R22-2(129.125mm,155.6mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4363.407mil|Location2.X=4374.657mil|Location1.Y=9978.627mil|Location2.Y=9989.877mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4363.407mil|Location2.X=4374.657mil|Location1.Y=9978.627mil|Location2.Y=9989.877mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R24-1(86.6mm,156.275mm) on Top Layer And Pad R24-2(86.6mm,155.125mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3307.367mil|Location2.X=3318.617mil|Location1.Y=5924.43mil|Location2.Y=5935.68mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3307.367mil|Location2.X=3318.617mil|Location1.Y=5924.43mil|Location2.Y=5935.68mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R27-1(58.175mm,53.75mm) on Top Layer And Pad R27-2(59.325mm,53.75mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3474.69mil|Location2.X=3485.94mil|Location1.Y=5461.832mil|Location2.Y=5473.082mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3474.69mil|Location2.X=3485.94mil|Location1.Y=5461.832mil|Location2.Y=5473.082mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R28-1(62.425mm,42mm) on Top Layer And Pad R28-2(63.575mm,42mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6715.769mil|Location2.X=6727.019mil|Location1.Y=5311.632mil|Location2.Y=5322.882mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6715.769mil|Location2.X=6727.019mil|Location1.Y=5311.632mil|Location2.Y=5322.882mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R30-1(146.35mm,37.733mm) on Top Layer And Pad R30-2(146.35mm,36.583mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6715.769mil|Location2.X=6727.019mil|Location1.Y=7385.123mil|Location2.Y=7396.373mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6715.769mil|Location2.X=6727.019mil|Location1.Y=7385.123mil|Location2.Y=7396.373mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R31-1(146.35mm,90.4mm) on Top Layer And Pad R31-2(146.35mm,89.25mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6715.769mil|Location2.X=6727.019mil|Location1.Y=4274.887mil|Location2.Y=4286.137mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6715.769mil|Location2.X=6727.019mil|Location1.Y=4274.887mil|Location2.Y=4286.137mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R32-1(146.35mm,11.4mm) on Top Layer And Pad R32-2(146.35mm,10.25mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6715.769mil|Location2.X=6727.019mil|Location1.Y=6348.378mil|Location2.Y=6359.628mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=6715.769mil|Location2.X=6727.019mil|Location1.Y=6348.378mil|Location2.Y=6359.628mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R33-1(146.35mm,64.067mm) on Top Layer And Pad R33-2(146.35mm,62.917mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4066.288mil|Location2.X=4077.538mil|Location1.Y=4734.532mil|Location2.Y=4745.782mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4066.288mil|Location2.X=4077.538mil|Location1.Y=4734.532mil|Location2.Y=4745.782mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R34-1(77mm,21.925mm) on Top Layer And Pad R34-2(77mm,23.075mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2126.265mil|Location2.X=2137.515mil|Location1.Y=7225.737mil|Location2.Y=7236.987mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2126.265mil|Location2.X=2137.515mil|Location1.Y=7225.737mil|Location2.Y=7236.987mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R35-1(29.325mm,84.75mm) on Top Layer And Pad R35-2(28.175mm,84.75mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3121.407mil|Location2.X=3132.657mil|Location1.Y=4724.69mil|Location2.Y=4735.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3121.407mil|Location2.X=3132.657mil|Location1.Y=4724.69mil|Location2.Y=4735.94mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R42-1(53mm,21.675mm) on Top Layer And Pad R42-2(53mm,22.825mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5902.013mil|Location2.X=5913.263mil|Location1.Y=4248.288mil|Location2.Y=4259.538mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5902.013mil|Location2.X=5913.263mil|Location1.Y=4248.288mil|Location2.Y=4259.538mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R43-1(124.079mm,11.176mm) on Top Layer And Pad R43-2(125.229mm,11.176mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5902.013mil|Location2.X=5913.263mil|Location1.Y=6348.971mil|Location2.Y=6360.221mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5902.013mil|Location2.X=5913.263mil|Location1.Y=6348.971mil|Location2.Y=6360.221mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R44-1(124.079mm,64.533mm) on Top Layer And Pad R44-2(125.229mm,64.533mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5895.95mil|Location2.X=5907.2mil|Location1.Y=5394.903mil|Location2.Y=5406.153mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5895.95mil|Location2.X=5907.2mil|Location1.Y=5394.903mil|Location2.Y=5406.153mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R45-1(123.925mm,40.3mm) on Top Layer And Pad R45-2(125.075mm,40.3mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5902.013mil|Location2.X=5913.263mil|Location1.Y=7399.312mil|Location2.Y=7410.562mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5902.013mil|Location2.X=5913.263mil|Location1.Y=7399.312mil|Location2.Y=7410.562mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R46-1(124.079mm,91.212mm) on Top Layer And Pad R46-2(125.229mm,91.212mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5001.328mil|Location2.X=5012.578mil|Location1.Y=4724.69mil|Location2.Y=4735.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=5001.328mil|Location2.X=5012.578mil|Location1.Y=4724.69mil|Location2.Y=4735.94mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R47-1(100.75mm,21.675mm) on Top Layer And Pad R47-2(100.75mm,22.825mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2746.343mil|Location2.X=2757.593mil|Location1.Y=7243.328mil|Location2.Y=7254.578mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2746.343mil|Location2.X=2757.593mil|Location1.Y=7243.328mil|Location2.Y=7254.578mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R51-1(43.925mm,87.25mm) on Top Layer And Pad R51-2(45.075mm,87.25mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2116.422mil|Location2.X=2127.672mil|Location1.Y=6741.359mil|Location2.Y=6752.609mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2116.422mil|Location2.X=2127.672mil|Location1.Y=6741.359mil|Location2.Y=6752.609mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R6-1(27.925mm,74.5mm) on Top Layer And Pad R6-2(29.075mm,74.5mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4738.604mil|Location2.X=4749.854mil|Location1.Y=7427.84mil|Location2.Y=7439.09mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4738.604mil|Location2.X=4749.854mil|Location1.Y=7427.84mil|Location2.Y=7439.09mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R65-1(96.13mm,91.485mm) on Top Layer And Pad R65-2(96.13mm,90.335mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4819.438mil|Location2.X=4830.688mil|Location1.Y=7624.69mil|Location2.Y=7635.94mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4819.438mil|Location2.X=4830.688mil|Location1.Y=7624.69mil|Location2.Y=7635.94mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad R66-1(96.13mm,95.335mm) on Top Layer And Pad R66-2(96.13mm,96.485mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2314.32mil|Location2.X=2325.57mil|Location1.Y=6074.099mil|Location2.Y=6085.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2314.32mil|Location2.X=2325.57mil|Location1.Y=6074.099mil|Location2.Y=6085.349mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U7-1(33.025mm,56.05mm) on Top Layer And Pad U7-2(33.025mm,57mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2314.32mil|Location2.X=2325.57mil|Location1.Y=6111.501mil|Location2.Y=6122.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2314.32mil|Location2.X=2325.57mil|Location1.Y=6111.501mil|Location2.Y=6122.751mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U7-2(33.025mm,57mm) on Top Layer And Pad U7-3(33.025mm,57.95mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2174.43mil|Location2.X=2185.68mil|Location1.Y=6111.501mil|Location2.Y=6122.751mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2174.43mil|Location2.X=2185.68mil|Location1.Y=6111.501mil|Location2.Y=6122.751mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U7-4(30.475mm,57.95mm) on Top Layer And Pad U7-5(30.475mm,57mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2174.43mil|Location2.X=2185.68mil|Location1.Y=6074.099mil|Location2.Y=6085.349mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\user\Desktop\st7920\mplab\ELECTRONIC_LOAD_2020\DC_Electronic_load\Hardware\altium_files\electronic_dc_load_v2\electronic_dc_load_v2\electronic_dc_load_v2.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2174.43mil|Location2.X=2185.68mil|Location1.Y=6074.099mil|Location2.Y=6085.349mil|Absolute=True">Minimum Solder Mask Sliver Constraint: (0.147mm &lt; 0.254mm) Between Pad U7-5(30.475mm,57mm) on Top Layer And Pad U7-6(30.475mm,56.05mm) on Top Layer [Top Solder] Mask Sliver [0.147mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
