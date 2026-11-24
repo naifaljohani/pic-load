@@ -1,11 +1,12 @@
 # MPLAB X build output (regenerated on every build)
-source/**/build/
-source/**/debug/
-source/**/dist/
+**/build/
+**/debug/
+**/dist/
 
 # MPLAB X per-user / per-machine settings
-source/**/nbproject/private/
-source/**/nbproject/Package-*.bash
+**/nbproject/private/
+**/nbproject/Package-*.bash
+**/nbproject/Makefile-genesis.properties
 
 # Backups
 *.bak

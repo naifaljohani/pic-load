@@ -21,6 +21,11 @@ This is a proof of concept for a basic implementation using PIC16F1779 MCU from 
 
 
 
+## Firmware
+
+The firmware is being rebuilt step by step. See [Firmware/README.md](Firmware/README.md) for the
+current state and the pins in use.
+
 ## License
 
 This repo uses two licenses:
