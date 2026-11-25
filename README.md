@@ -11,8 +11,7 @@
 
 ## Firmware
 
-The firmware is being rebuilt step by step. See [Firmware/README.md](Firmware/README.md) for the
-current state and the pins in use.
+See [Firmware/README.md](Firmware/README.md) for the current state and the pins in use.
 
 ## License
 
