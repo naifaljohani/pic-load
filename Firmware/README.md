@@ -1,9 +1,5 @@
 # Firmware
 
-The firmware is being rebuilt from scratch, one block at a time. Each step is tested on the
-board before the next one is added. The previous firmware is still in the git history (tag
-`legacy-firmware`).
-
 ## Project
 
 `ultimate_load.X` is an MPLAB X project for the PIC16F1779 (XC8 v1.45, MPLAB X v6.00, internal
