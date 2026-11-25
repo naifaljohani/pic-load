@@ -2,9 +2,13 @@
  * @file    keypad.h
  * @brief   4x4 matrix keypad on port D.
  *
- * Wiring: rows 1..4 = RD0..RD3, columns 1..4 = RD4..RD7 (see board.h).
+ * Wiring (see board.h): the 8-pin keypad connector is fitted in reverse pin
+ * order, so the drive lines RD0..RD3 go to keypad columns 4..1 and the
+ * sense lines RD4..RD7 go to keypad rows 4..1. The key map in keypad.c
+ * accounts for this. In the text below, "row" means a drive line RD0..RD3
+ * and "column" a sense line RD4..RD7.
  *
- * Layout (key at row r, column c):
+ * Layout as seen on the keypad (row 1 at the top, column 1 on the left):
  * @verbatim
  *     1 2 3 A
  *     4 5 6 B

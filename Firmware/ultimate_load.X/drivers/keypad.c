@@ -8,8 +8,12 @@
 
 #define KP_DEBOUNCE  5                  // equal full scans (5 x 4 ms = 20 ms)
 
-// key at row r, column c = kp_map[r * 4 + c]
-static const char kp_map[] = "123A456B789C*0#D";
+// Character for scan position (r, c) = kp_map[r * 4 + c], where r = 0..3 is
+// the drive line RD0..RD3 and c = 0..3 the sense line RD4..RD7.
+// The keypad connector is fitted in reverse pin order (keypad pin 8 -> RD0 ...
+// pin 1 -> RD7), so RD0..RD3 are keypad columns 4..1 and RD4..RD7 are keypad
+// rows 4..1:  kp_map[r * 4 + c] = key in keypad row (4 - c), column (4 - r).
+static const char kp_map[] = "DCBA#9630852*741";
 
 /* ---- shared with the interrupt ---- */
 static volatile char     kp_key;        // key held now (debounced), 0 = none

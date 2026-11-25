@@ -13,8 +13,11 @@
  * | Encoder button SW | RA2       | in        | pull-up, Schmitt, low = pressed|
  * | I2C SCL (MSSP1)   | RC3       | open-drain| via PPS, see drivers/i2c.c     |
  * | I2C SDA (MSSP1)   | RC4       | open-drain| via PPS, see drivers/i2c.c     |
- * | Keypad rows 1..4  | RD0..RD3  | out (low) | one row driven at a time       |
- * | Keypad cols 1..4  | RD4..RD7  | in        | pull-up, Schmitt               |
+ * | Keypad cols 4..1  | RD0..RD3  | out (low) | drive lines, one at a time     |
+ * | Keypad rows 4..1  | RD4..RD7  | in        | sense lines, pull-up, Schmitt  |
+ *
+ * The keypad connector is fitted in reverse pin order (keypad pin 8 -> RD0,
+ * pin 1 -> RD7); drivers/keypad.c maps the keys accordingly.
  * | Status LED        | RE2       | out       | toggles on each encoder detent |
  *
  * The GLCD (ST7920) is on the I2C bus through a PCF8574A at address 0x38,
