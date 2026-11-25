@@ -4,11 +4,27 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>system.h</itemPath>
-      <itemPath>i2c.h</itemPath>
-      <itemPath>st7920_glcd.h</itemPath>
-      <itemPath>st7920_glcd_config.h</itemPath>
-      <itemPath>st7920_font5x7.h</itemPath>
+      <logicalFolder name="app" displayName="app" projectFiles="true">
+        <itemPath>app/ui.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="core" displayName="core" projectFiles="true">
+        <itemPath>core/board.h</itemPath>
+        <itemPath>core/system.h</itemPath>
+        <itemPath>core/tick.h</itemPath>
+        <itemPath>core/scheduler.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
+        <itemPath>drivers/encoder.h</itemPath>
+        <itemPath>drivers/button.h</itemPath>
+        <itemPath>drivers/keypad.h</itemPath>
+        <itemPath>drivers/i2c.h</itemPath>
+        <itemPath>drivers/st7920_glcd.h</itemPath>
+        <itemPath>drivers/st7920_glcd_config.h</itemPath>
+        <itemPath>drivers/st7920_font5x7.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="util" displayName="util" projectFiles="true">
+        <itemPath>util/fmt.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -17,9 +33,27 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="app" displayName="app" projectFiles="true">
+        <itemPath>app/ui.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="core" displayName="core" projectFiles="true">
+        <itemPath>core/system.c</itemPath>
+        <itemPath>core/tick.c</itemPath>
+        <itemPath>core/scheduler.c</itemPath>
+        <itemPath>core/isr.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="drivers" displayName="drivers" projectFiles="true">
+        <itemPath>drivers/encoder.c</itemPath>
+        <itemPath>drivers/button.c</itemPath>
+        <itemPath>drivers/keypad.c</itemPath>
+        <itemPath>drivers/i2c.c</itemPath>
+        <itemPath>drivers/st7920_glcd.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="util" displayName="util" projectFiles="true">
+        <itemPath>util/fmt.c</itemPath>
+      </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>i2c.c</itemPath>
-      <itemPath>st7920_glcd.c</itemPath>
+      <itemPath>config_bits.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -78,7 +112,7 @@
         <property key="default-char-type" value="true"/>
         <property key="define-macros" value=""/>
         <property key="disable-optimizations" value="false"/>
-        <property key="extra-include-directories" value=""/>
+        <property key="extra-include-directories" value="app;core;drivers;util"/>
         <property key="favor-optimization-for" value="-speed,+space"/>
         <property key="garbage-collect-data" value="true"/>
         <property key="garbage-collect-functions" value="true"/>
