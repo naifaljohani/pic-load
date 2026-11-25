@@ -9,29 +9,6 @@
 > The author accepts **no liability** for any damage, injury or loss that comes from using these files or any device made from them.
 > This disclaimer is set out in section 5 of the CERN-OHL-P and in the MIT License.
 
-This is a proof of concept for a basic implementation using PIC16F1779 MCU from Microchip Technologies which has a plenty of analog features that could be very helpful to design an Electronic DC load that is affordable with acceptable features and performance.
-
-
-
-
--------------------- Project pictures----- v0--- now archive--
-
-
-![Mosfet circuit](Hardware/Mosfet%20circuit.JPG)
-
-
-![controlboard](Hardware/controlboard.jpg)
-
-
-
-
-
-
-
-
-
-
-
 ## Firmware
 
 The firmware is being rebuilt step by step. See [Firmware/README.md](Firmware/README.md) for the
