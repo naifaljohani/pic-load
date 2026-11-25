@@ -115,7 +115,7 @@ ${OBJECTDIR}/st7920_glcd.p1: st7920_glcd.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/st7920_glcd.p1.d 
 	@${RM} ${OBJECTDIR}/st7920_glcd.p1 
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1  --debugger=pickit3    --double=24 --float=24 --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=free -P -N255 --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+config,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"     -o${OBJECTDIR}/st7920_glcd.p1 st7920_glcd.c 
-	@-${MV} ${OBJECTDIR}/glcd.d ${OBJECTDIR}/st7920_glcd.p1.d 
+	@-${MV} ${OBJECTDIR}/st7920_glcd.d ${OBJECTDIR}/st7920_glcd.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/st7920_glcd.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 else
@@ -140,7 +140,7 @@ ${OBJECTDIR}/st7920_glcd.p1: st7920_glcd.c  nbproject/Makefile-${CND_CONF}.mk
 	@${RM} ${OBJECTDIR}/st7920_glcd.p1.d 
 	@${RM} ${OBJECTDIR}/st7920_glcd.p1 
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G    --double=24 --float=24 --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=free -P -N255 --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-osccal,-resetbits,-download,-stackcall,+config,+clib $(COMPARISON_BUILD)  --output=-mcof,+elf:multilocs --stack=compiled:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"     -o${OBJECTDIR}/st7920_glcd.p1 st7920_glcd.c 
-	@-${MV} ${OBJECTDIR}/glcd.d ${OBJECTDIR}/st7920_glcd.p1.d 
+	@-${MV} ${OBJECTDIR}/st7920_glcd.d ${OBJECTDIR}/st7920_glcd.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/st7920_glcd.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
@@ -178,11 +178,3 @@ endif
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${OBJECTDIR}
 	${RM} -r ${DISTDIR}
-
-# Enable dependency checking
-.dep.inc: .depcheck-impl
-
-DEPFILES=$(shell mplabwildcard ${POSSIBLE_DEPFILES})
-ifneq (${DEPFILES},)
-include ${DEPFILES}
-endif

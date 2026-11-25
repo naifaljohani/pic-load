@@ -22,6 +22,12 @@
  *   bar  : speed bar, full scale = SPEED_BAR_MAX detents/s
  *   SW   : box fills while the button is held; a press resets POS/MAX/MISS
  *
+ * Keypad test (4x4 matrix on port D)
+ *   Rows    : RD0..RD3 (row 1 = RD0), driven low one at a time
+ *   Columns : RD4..RD7 (col 1 = RD4), inputs with weak pull-ups
+ *   Header "K:x nnn" : x = last key (inverted while held),
+ *                      nnn = press count (one press must add exactly 1)
+ *
  * LED on RE2 toggles on every detent.
  * Device: PIC16F1779, XC8, internal oscillator 16 MHz
  */
@@ -119,6 +125,54 @@ static void enc_decode(void)
     }
 }
 
+/* ---------------- 4x4 keypad on port D ---------------- */
+#define KP_DEBOUNCE  5                  // equal full scans (5 x 4 ms = 20 ms)
+
+// key at row r, column c = kp_map[r * 4 + c]
+static const char kp_map[] = "123A456B789C*0#D";
+
+static volatile uint8_t  kp_key;        // key held now (debounced), 0 = none
+static volatile uint8_t  kp_last;       // last key pressed, 0 = none yet
+static volatile uint16_t kp_count;      // number of presses
+
+static uint8_t kp_row;                  // row being driven low (0..3)
+
+static void kp_select_row(uint8_t r)    // selected row = output low, rest = inputs
+{
+    TRISD = (uint8_t)~(1u << r);
+}
+
+// Called every 1 ms from the tick. The columns are read for the row that was
+// selected on the previous tick (1 ms to settle), then the next row is selected.
+// A full scan of the 4 rows takes 4 ms.
+static void kp_scan(void)
+{
+    static uint8_t found = 0;           // key seen during the current scan
+    static uint8_t cand  = 0;           // debounce candidate
+    static uint8_t cnt   = 0;
+
+    uint8_t cols = (uint8_t)(((uint8_t)~PORTD) >> 4);   // pressed = 1, bit0 = RD4
+    if (cols && !found)
+    {
+        uint8_t c = 0;
+        while (!(cols & 1u)) { cols >>= 1; c++; }
+        found = (uint8_t)kp_map[(uint8_t)(kp_row * 4u + c)];
+    }
+
+    if (++kp_row >= 4u)                 // end of a full scan
+    {
+        kp_row = 0;
+        if (found != cand) { cand = found; cnt = 0; }
+        else if (cnt < KP_DEBOUNCE && ++cnt == KP_DEBOUNCE && cand != kp_key)
+        {
+            kp_key = cand;
+            if (cand) { kp_last = cand; kp_count++; }
+        }
+        found = 0;
+    }
+    kp_select_row(kp_row);
+}
+
 void interrupt isr(void)
 {
     /* ---- encoder edge: IOC on RA0 (CLK) / RA1 (DT), both edges ---- */
@@ -139,6 +193,7 @@ void interrupt isr(void)
         PIR1bits.TMR2IF = 0;
 
         enc_decode();                   // backup sample (catches anything missed)
+        kp_scan();                      // keypad: one row per tick
 
         // button: 8 equal samples in a row = debounced
         sw_hist = (uint8_t)(sw_hist << 1) | (PORTAbits.RA2 ? 0u : 1u);
@@ -179,6 +234,17 @@ static void encoder_init(void)
     IOCAN |= 0x03;
     IOCAF  = 0x00;
     INTCONbits.IOCIE = 1;
+}
+
+// Call after encoder_init() (it clears WPUD) and before tick_init().
+static void keypad_init(void)
+{
+    ANSELD = 0x00;                  // port D digital
+    LATD   = 0x00;                  // selected row drives low
+    INLVLD |= 0xF0;                 // Schmitt-trigger levels on the columns
+    WPUD   = 0xF0;                  // weak pull-ups on the columns RD4..RD7
+    kp_row = 0;
+    TRISD  = 0xFE;                  // row 1 (RD0) selected, rest inputs
 }
 
 static void tick_init(void)
@@ -265,6 +331,7 @@ static void draw_static(void)
     glcd_fb_clear();
     glcd_color(GLCD_COLOR_ON);
     glcd_text(2, 1, "ENCODER");
+    glcd_text(50, 1, "K:");                                         // keypad test
     glcd_line(0, 10, 127, 10);
 
     glcd_circle(DIAL_X, DIAL_Y, DIAL_R);
@@ -296,8 +363,7 @@ void main(void)
     draw_static();
 
     encoder_init();
-    glcd_color(GLCD_COLOR_ON);
-    glcd_text(62, 1, "IOC");    // edge path in use
+    keypad_init();              // after encoder_init (WPUD)
     tick_init();
     INTCONbits.GIE = 1;
 
@@ -310,6 +376,9 @@ void main(void)
     uint8_t  shown_angle = 0xFF;
     uint8_t  shown_bar   = 0xFF;
     int16_t  peak        = 0;
+    uint8_t  shown_kkey  = 0xFF;
+    uint8_t  shown_klast = 0xFF;
+    uint16_t shown_kcnt  = 0xFFFF;
     char     buf[8];
 
     while (1)
@@ -327,6 +396,9 @@ void main(void)
         int16_t  spd  = enc_speed;
         uint16_t miss = enc_miss;
         uint8_t  sw   = sw_down;
+        uint8_t  kkey  = kp_key;
+        uint8_t  klast = kp_last;
+        uint16_t kcnt  = kp_count;
         INTCONbits.GIE = 1;
 
         int16_t aspd = (spd < 0) ? (int16_t)-spd : spd;
@@ -397,6 +469,28 @@ void main(void)
             glcd_color(txt);
             glcd_text(112, 1, "SW");
             shown_sw = sw;
+        }
+
+        // ---- keypad test: last key (inverted while held) and press count ----
+        if (kkey != shown_kkey || klast != shown_klast)
+        {
+            uint8_t box = GLCD_COLOR_OFF, txt = GLCD_COLOR_ON;
+            if (kkey) { box = GLCD_COLOR_ON; txt = GLCD_COLOR_OFF; }
+            buf[0] = klast ? (char)klast : '-';
+            buf[1] = '\0';
+            glcd_color(box);
+            glcd_fill_rect(61, 1, 7, 8);
+            glcd_color(txt);
+            glcd_text(62, 1, buf);
+            shown_kkey  = kkey;
+            shown_klast = klast;
+        }
+
+        if (kcnt != shown_kcnt)
+        {
+            fmt_u((uint16_t)(kcnt % 1000u), 3, buf);
+            field(72, 1, 3, buf);
+            shown_kcnt = kcnt;
         }
 
         glcd_update();          // sends only the changed areas
