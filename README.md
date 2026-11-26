@@ -22,10 +22,6 @@ This repo uses two licenses:
 
 Copyright (c) 2026 naifaljohani
 
-Both licenses are permissive. You may use, modify, build, share and sell the design and the code, including commercially. You don't have to publish your changes, and you owe the author nothing. The only conditions are:
-- keep the copyright and license notices
-- if you share modified design files, note what you changed
-
 ## Use of AI tools
 
 AI assistants were used during development, mainly to help write and
