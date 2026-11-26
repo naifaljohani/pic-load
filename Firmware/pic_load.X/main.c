@@ -1,8 +1,8 @@
 /**
  * @file    main.c
- * @brief   Ultimate Load firmware: start-up and task table.
+ * @brief   PIC Load firmware: start-up and task table.
  *
- * Board : Ultimate Load control board, PIC16F1779, XC8, internal osc 16 MHz
+ * Board : PIC Load control board, PIC16F1779, XC8, internal osc 16 MHz
  * Pins  : see core/board.h
  *
  * Structure (tick + cooperative tasks)

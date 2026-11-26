@@ -1,6 +1,6 @@
 /**
  * @file    board.h
- * @brief   Pin map of the Ultimate Load control board (PIC16F1779).
+ * @brief   Pin map of the PIC Load control board (PIC16F1779).
  *
  * Every pin used by the firmware is listed here. Drivers use these macros
  * instead of naming registers directly, so moving a signal to another pin
