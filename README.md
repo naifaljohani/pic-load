@@ -1,4 +1,4 @@
-## Use as is: no warranty, no liability
+## Use as is
 
 > [!WARNING]
 > **All the designs are preliminary and have bugs. You have been warned.**
